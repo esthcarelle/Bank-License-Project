@@ -1,0 +1,43 @@
+spring:
+  application:
+    name: bnr-licensing-portal
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/licensing}
+    username: ${SPRING_DATASOURCE_USERNAME:bnr}
+    password: ${SPRING_DATASOURCE_PASSWORD:bnr}
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false
+    properties:
+      hibernate:
+        jdbc:
+          time_zone: UTC
+  servlet:
+    multipart:
+      max-file-size: 5MB
+      max-request-size: 6MB
+
+server:
+  error:
+    include-message: always
+    include-binding-errors: never
+    include-stacktrace: never
+    include-exception: false
+
+portal:
+  tokens:
+    secret: ${PORTAL_TOKENS_SECRET:dev-secret-must-be-at-least-256-bits-for-hs256-signing-key-change-in-prod}
+    expiration-ms: 86400000
+  files:
+    upload-dir: ${PORTAL_FILES_UPLOAD_DIR:./data/uploads}
+
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+
+logging:
+  level:
+    com.bnr: INFO

@@ -1,0 +1,38 @@
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: bnr
+      POSTGRES_PASSWORD: bnr
+      POSTGRES_DB: licensing
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U bnr -d licensing"]
+      interval: 3s
+      timeout: 5s
+      retries: 10
+
+  api:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/licensing
+      SPRING_DATASOURCE_USERNAME: bnr
+      SPRING_DATASOURCE_PASSWORD: bnr
+      PORTAL_TOKENS_SECRET: "change-me-in-production-use-long-random-secret-key-min-256-bits"
+      PORTAL_FILES_UPLOAD_DIR: /data/uploads
+    ports:
+      - "8080:8080"
+    volumes:
+      - uploads:/data/uploads
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  pgdata:
+  uploads:
