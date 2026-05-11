@@ -83,7 +83,7 @@ Includes:
 
 - `backend/` — Spring Boot 3, JPA, Flyway, JWT, PostgreSQL.
 - `frontend/` — React + TypeScript + Vite.
-- `DESIGN.pdf` — architecture, data model, state machine, roles, audit, trade-offs.
+- `BNR Licensing & Compliance Portal (1).pdf` — architecture, data model, state machine, roles, audit, trade-offs.
 
 ## Configuration
 
@@ -99,4 +99,4 @@ Max upload size is **5MB** per file (enforced by Spring and `DocumentUploads`).
 
 ---
 
-See **DESIGN.pdf** for how each assessment requirement is met and what would be extended with more time.
+See **BNR Licensing & Compliance Portal (1).pdf** for how each assessment requirement is met and what would be extended with more time.
